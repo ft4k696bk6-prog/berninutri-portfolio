@@ -1,0 +1,11 @@
+{
+  "name": "BerniNutri AI",
+  "short_name": "BerniNutri",
+  "description": "Meal photo analysis and nutrition tracking.",
+  "start_url": "/app/add",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#f7f8f3",
+  "theme_color": "#4fd2a8",
+  "orientation": "portrait"
+}
