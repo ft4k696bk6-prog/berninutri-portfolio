@@ -1,7 +1,7 @@
 {
   "name": "BerniNutri AI",
   "short_name": "BerniNutri",
-  "description": "Meal photo analysis and nutrition tracking.",
+  "description": "AI meal photo analysis, local history, and macro tracking.",
   "start_url": "/app/add",
   "scope": "/",
   "display": "standalone",

@@ -1,5 +1,6 @@
 {
   "name": "berninutri-portfolio",
+  "description": "Mobile-first nutrition tracker demo with AI meal photo analysis and local meal history.",
   "private": true,
   "version": "1.0.0",
   "type": "module",
