@@ -1,66 +1,101 @@
-# BerniNutri AI
+# BerniNutri
 
-BerniNutri AI is a mobile-first nutrition tracker demo that turns a meal photo into an estimated nutrition log. The app lets users upload or sample a meal image, send it to an AI-backed analysis endpoint, review the result, save it locally, and track calories and macros through a compact app-style interface.
+BerniNutri is a mobile-first AI nutrition tracker prototype. It lets a user upload a meal photo, send it to an OpenAI-backed analysis endpoint, review estimated calories/macros and save the result in local browser history.
 
-Live demo: https://berninutri-portfolio.vercel.app
+PL: BerniNutri to prototyp aplikacji AI do pomocniczej analizy posiłków ze zdjęcia. Wyniki są estymacją, nie poradą medyczną ani dietetyczną.
 
-## What It Does
+## Live demo
 
-- Provides a mobile app experience with login, bottom navigation, swipe-friendly routes, and standalone PWA metadata.
-- Uploads meal photos, compresses them in the browser, and sends them to `/api/analyze`.
-- Uses an OpenAI-backed Vercel endpoint with a strict JSON schema for meal name, calories, macros, ingredients, confidence, and notes.
-- Normalizes AI responses before they reach the UI, so the app can display consistent nutrition cards.
-- Saves meals in local browser storage and keeps sample meals available for a useful empty state.
-- Includes Today, Add Meal, Result, History, Stats, and Profile screens.
-- Handles missing API configuration and analysis errors with clear user-facing messages.
+https://berninutri-portfolio.vercel.app
 
-## Why This Project Matters
+## Screenshots
 
-This project shows the full shape of an AI product, not only a prompt. The frontend handles image preparation, navigation, review, saved history, and progress views, while the backend keeps the OpenAI key server-side and validates the response before the UI trusts it.
+Screenshots should be added to `docs/screenshots/`. Placeholder image links are intentionally not included.
 
-The app is intentionally built as a portfolio-ready product slice: small enough to understand quickly, but complete enough to show product thinking, API integration, error handling, and polished mobile UI work.
+## Features
 
-## Tech Stack
+- Mobile-first React UI with app-like routes.
+- Meal photo upload and browser-side image compression.
+- `/api/analyze` serverless endpoint that keeps `OPENAI_API_KEY` server-side.
+- OpenAI Responses API call with strict JSON schema.
+- Nutrition result review with calories, macros, ingredients, confidence and notes.
+- Local meal history stored in browser localStorage.
+- Missing API key and analysis error states.
+- Sample meals so the UI has a useful empty state.
 
-- React 19 and TypeScript
+## AI role and limitations
+
+The AI feature estimates visible food from a photo. Results can be incomplete or inaccurate. BerniNutri is not medical advice, dietary advice or a professional nutrition service. Users should treat the result as a helper, not a source of truth.
+
+## Tech stack
+
+- React
+- TypeScript
 - Vite
 - Vercel serverless functions
-- OpenAI Responses API for image analysis
-- Browser localStorage for saved meal history
-- lucide-react icons
-- PWA manifest metadata
+- OpenAI Responses API
+- Browser localStorage
+- lucide-react
 
-## Running Locally
+## Project structure
+
+- `src/main.tsx` — app shell, screens and UI flow.
+- `src/meal-utils.ts` — testable meal conversion and macro helper logic.
+- `src/styles.css` — mobile-first app styling.
+- `api/analyze.js` — Vercel endpoint for OpenAI image analysis.
+- `public/` — PWA manifest.
+- `docs/` — roadmap, changelog, issue backlog and screenshots folder.
+
+## Getting started
 
 ```bash
+git clone https://github.com/ft4k696bk6-prog/berninutri-portfolio.git
+cd berninutri-portfolio
 npm install
 npm run dev
 ```
 
-Build the app:
+Quality checks:
 
 ```bash
+npm run lint
+npm run typecheck
+npm run test
 npm run build
 ```
 
-## AI Setup
+## Environment variables
 
-Set an OpenAI API key in local or Vercel environment variables:
-
-```bash
-OPENAI_API_KEY=sk-...
-```
-
-Optionally override the model:
+Create `.env.local` from `.env.example`.
 
 ```bash
+OPENAI_API_KEY=
 OPENAI_MODEL=gpt-4.1-mini
 ```
 
-Without `OPENAI_API_KEY`, the interface still runs, but `/api/analyze` returns a configuration message instead of an analysis.
+Without `OPENAI_API_KEY`, the UI still runs, but `/api/analyze` returns a configuration message instead of an analysis.
 
-## Current Status
+## What I learned
 
-BerniNutri AI is a functional portfolio demo. The main user journey is complete: choose a meal image, analyze it, review nutrition estimates, save the meal, and browse daily history and stats. The next useful steps would be user accounts, a real database, editable meals, and longer-term nutrition trends.
+- Building a product flow around an AI feature instead of only a prompt.
+- Keeping API keys server-side in a Vercel function.
+- Normalizing structured model output before displaying it in the UI.
+- Handling localStorage-backed history and empty states.
+- Communicating AI uncertainty clearly in the interface and docs.
 
-AI nutrition estimates are approximate and should not be treated as medical or dietary advice.
+## Roadmap
+
+- Improve image and input validation.
+- Add editable meal results before saving.
+- Add account-based history with a real database.
+- Add stronger API error handling and retry copy.
+- Add more tests for analysis response handling.
+- Improve accessibility and keyboard navigation.
+
+## Status
+
+Prototype.
+
+## License
+
+MIT.

@@ -29,49 +29,10 @@ import {
   User,
   Utensils,
 } from "lucide-react";
+import { macroPercent, mealFromAnalysis, type Meal, type MealAnalysis } from "./meal-utils";
 import "./styles.css";
 
 type Route = "/login" | "/app" | "/app/add" | "/app/result" | "/app/history" | "/app/stats" | "/app/profile";
-
-type Ingredient = {
-  name: string;
-  grams: number;
-  calories: number;
-};
-
-type MealAnalysis = {
-  mealName: string;
-  totalWeightGrams: number;
-  totalCalories: number;
-  proteinGrams: number;
-  carbsGrams: number;
-  fatGrams: number;
-  fiberGrams: number;
-  sugarGrams: number;
-  sodiumMg: number;
-  confidence: "low" | "medium" | "high";
-  ingredients: Ingredient[];
-  notes: string;
-};
-
-type Meal = {
-  id: number;
-  name: string;
-  time: string;
-  image: string;
-  calories: number;
-  protein: number;
-  carbs: number;
-  fat: number;
-  fiber: number;
-  sugar: number;
-  sodium: number;
-  weight: number;
-  confidence: MealAnalysis["confidence"];
-  ingredients: Ingredient[];
-  notes: string;
-  source: "sample" | "ai";
-};
 
 type PhotoState = {
   previewUrl: string;
@@ -156,31 +117,6 @@ function loadMeals(): Meal[] {
 
 function saveMeals(meals: Meal[]) {
   localStorage.setItem(STORAGE_KEY, JSON.stringify(meals));
-}
-
-function mealFromAnalysis(analysis: MealAnalysis, image: string): Meal {
-  return {
-    id: Date.now(),
-    name: analysis.mealName,
-    time: new Intl.DateTimeFormat("en", { hour: "2-digit", minute: "2-digit" }).format(new Date()),
-    image,
-    calories: Math.round(analysis.totalCalories),
-    protein: Math.round(analysis.proteinGrams),
-    carbs: Math.round(analysis.carbsGrams),
-    fat: Math.round(analysis.fatGrams),
-    fiber: Math.round(analysis.fiberGrams),
-    sugar: Math.round(analysis.sugarGrams),
-    sodium: Math.round(analysis.sodiumMg),
-    weight: Math.round(analysis.totalWeightGrams),
-    confidence: analysis.confidence,
-    ingredients: analysis.ingredients,
-    notes: analysis.notes,
-    source: "ai",
-  };
-}
-
-function macroPercent(value: number, goal: number) {
-  return `${Math.min(100, Math.round((value / goal) * 100))}%`;
 }
 
 async function fileToDataUrl(file: File): Promise<string> {
