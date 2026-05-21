@@ -33,7 +33,7 @@ import { initGoogleAnalytics } from "./google-analytics";
 import { macroPercent, mealFromAnalysis, type Meal, type MealAnalysis } from "./meal-utils";
 import "./styles.css";
 
-initGoogleAnalytics(import.meta.env.VITE_GA_MEASUREMENT_ID);
+initGoogleAnalytics(import.meta.env.VITE_GA_MEASUREMENT_ID, import.meta.env.VITE_GOOGLE_TAG_ID);
 
 type Route = "/login" | "/app" | "/app/add" | "/app/result" | "/app/history" | "/app/stats" | "/app/profile";
 
